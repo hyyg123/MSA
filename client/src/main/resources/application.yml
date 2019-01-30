@@ -9,3 +9,12 @@ eureka:
   client:
     service-url:
       default-zone: ${EUREKA_URL:http://localhost:8761/eureka/}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, shutdown
+  endpoint:
+    shutdown:
+      enabled: true
