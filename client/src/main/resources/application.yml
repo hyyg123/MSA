@@ -10,6 +10,11 @@ spring:
 
 server:
   port: ${PORT:8081}
+  ssl:  # SSL Key Store
+    key-store: classpath:keystore.p12
+    key-store-password: 123456
+    key-store-type: PKCS12
+    key-alias: client
 
 eureka:
   client:
@@ -22,6 +27,11 @@ eureka:
     lease-expiration-duration-in-seconds: 2 # 디스커버리는 서비스 등록 해제 하기 전에 마지막 하트비트에서부터 2초 기다림
     instance-id: ${spring.application.name}-${SEQUENCE_NO}  # 인스턴스 ID 지정
     prefer-ip-address: true # 호스트명 대신 IP 우선
+    secure-port-enabled: true
+    non-secure-port-enabled: false
+    status-page-url: https://${eureka.hostname}:${server.port}/actuator/info
+    health-check-url: https://${eureka.hostname}:${server.port}/actuator/helath
+    home-page-url: https://${eureka.hostname}:${server.port}/
 
 management:
   endpoints:
