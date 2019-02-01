@@ -1,6 +1,12 @@
 spring:
   application:
     name: client-service
+  cloud:
+    inetutils:
+      ignored-interfaces: # 해당 인터페이스 무시
+        - eth1*
+#      preferred-networks: # 해당 IP만
+#        - 192.165
 
 server:
   port: ${PORT:8081}
@@ -8,11 +14,14 @@ server:
 eureka:
   client:
     service-url:
-      default-zone: ${EUREKA_URL:http://localhost:8761/eureka/}
+      default-zone: ${EUREKA_URL:http://localhost:8761/eureka/} # 디스커버리 주소
+    registry-fetch-interval-seconds: 3  # 서비스 목록 3초마다 캐싱
+    disable-delta: true #캐싱할 때 변경된 부분만 업데이트
   instance:
-    lease-renewal-interval-in-seconds: 1
-    lease-expiration-duration-in-seconds: 2
-    instance-id: ${spring.application.name}-${SEQUENCE_NO}
+    lease-renewal-interval-in-seconds: 1  # 디스커버리한테 1초마다 하트비트 전송
+    lease-expiration-duration-in-seconds: 2 # 디스커버리는 서비스 등록 해제 하기 전에 마지막 하트비트에서부터 2초 기다림
+    instance-id: ${spring.application.name}-${SEQUENCE_NO}  # 인스턴스 ID 지정
+    prefer-ip-address: true # 호스트명 대신 IP 우선
 
 management:
   endpoints:

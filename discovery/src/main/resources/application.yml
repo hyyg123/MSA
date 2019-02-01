@@ -2,8 +2,9 @@ server:
   port: ${PORT:8761}
 eureka:
   client:
-    register-with-eureka: false
+    register-with-eureka: false # 유레카 클라이언트 비활성화
     fetch-registry: false
   server:
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 3000
+    enable-self-preservation: false # 자기 보호 모드(네트워크 장애가 발생하여도 서비스 해제를 방지하는 모드) 비활성화
+    eviction-interval-timer-in-ms: 3000 # 클라이언트로부터 하트비트 수신 여부 주기
+    response-cache-update-interval-ms: 3000 # Response 캐싱 주기
