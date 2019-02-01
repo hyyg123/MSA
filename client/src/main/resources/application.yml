@@ -14,7 +14,7 @@ server:
 eureka:
   client:
     service-url:
-      default-zone: ${EUREKA_URL:http://localhost:8761/eureka/} # 디스커버리 주소
+      default-zone: ${EUREKA_URL:http://admin:admin123@localhost:8761/eureka/} # 디스커버리 주소
     registry-fetch-interval-seconds: 3  # 서비스 목록 3초마다 캐싱
     disable-delta: true #캐싱할 때 변경된 부분만 업데이트
   instance:
